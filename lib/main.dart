@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gonuts/constant/text.dart';
 import 'package:gonuts/init_screen.dart';
 
 void main() {
@@ -17,8 +18,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      
-      home:InitScreen() ,
+      theme: ThemeData(
+        textTheme: CustomTextTheme().getTextTheme(context),
+      ),
+      home: InitScreen(),
     );
   }
 }
