@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gonuts/constant/text.dart';
+import 'package:gonuts/home_screen.dart';
 import 'package:gonuts/init_screen.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         textTheme: CustomTextTheme().getTextTheme(context),
       ),
-      home: InitScreen(),
+      home: HomeScreen(),
     );
   }
 }
