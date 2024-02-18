@@ -1,5 +1,7 @@
+import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:gonuts/constant/color.dart';
+import 'package:gonuts/widget/donut_card.dart';
 import 'package:gonuts/widget/search_widget.dart';
 
 import 'widget/custom_card.dart';
@@ -11,13 +13,27 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  var _selectedTab = _SelectedTab.home;
+
+  void _handleIndexChanged(int i) {
+    setState(() {
+      _selectedTab = _SelectedTab.values[i];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 248, 248, 248),
+      extendBody: true,
+      resizeToAvoidBottomInset: false,
       body: ListView(
+        scrollDirection: Axis.vertical,
         children: [
+          const SizedBox(
+            height: 20,
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 39),
             child: SearchWidget(),
@@ -46,51 +62,80 @@ class _HomeScreenState extends State<HomeScreen> {
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                width: 138,
-                height: 180,
-                decoration: const BoxDecoration(
-                  color: Colors.transparent,
-                ),
+          SizedBox(
+            height: 180,
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              scrollDirection: Axis.horizontal,
+              prototypeItem: createDonutCard(
+                context,
+                'Donuts',
+                'assets/images/donut_1.png',
+                'Chocolate Cherry',
+                '\$22',
               ),
-              Container(
-                width: 111,
-                height: 100,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10)),
-                ),
-              ),
-              Positioned(
-                bottom: 80,
-                child: Image.asset(
+              children: [
+                createDonutCard(
+                  context,
+                  'Donuts',
                   'assets/images/donut_1.png',
-                  width: 80,
-                ),
-              ),
-              Positioned(
-                bottom: 70,
-                child: Text(
                   'Chocolate Cherry',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ),
-              Positioned(
-                bottom: 40,
-                child: Text(
                   '\$22',
-                  style: Theme.of(context).textTheme.titleMedium,
                 ),
-              ),
-            ],
+                createDonutCard(
+                  context,
+                  'Donuts',
+                  'assets/images/donut_2.png',
+                  'Chocolate Cherry',
+                  '\$22',
+                ),
+                createDonutCard(
+                  context,
+                  'Donuts',
+                  'assets/images/donut_3.png',
+                  'Chocolate Cherry',
+                  '\$22',
+                ),
+              ],
+            ),
           )
+        ],
+      ),
+      bottomNavigationBar: DotNavigationBar(
+        //margin: EdgeInsets.only(left: 10, right: 10),
+        currentIndex: _SelectedTab.values.indexOf(_selectedTab),
+        dotIndicatorColor: Colors.white,
+
+        itemPadding: EdgeInsets.symmetric(horizontal: 30),
+        enablePaddingAnimation: true,
+        unselectedItemColor: Colors.grey[300],
+        splashBorderRadius: 60,
+        enableFloatingNavBar: false,
+        onTap: _handleIndexChanged,
+        items: [
+          /// Home
+          DotNavigationBarItem(
+            icon: Icon(Icons.home),
+            selectedColor: AppColors.primaryColor,
+          ),
+
+          /// Likes
+          DotNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            selectedColor: AppColors.primaryColor,
+          ),
+
+          /// Search
+          DotNavigationBarItem(
+            icon: Icon(Icons.search),
+            selectedColor: AppColors.primaryColor,
+          ),
+
+          /// Profile
+          DotNavigationBarItem(
+            icon: Icon(Icons.person),
+            selectedColor: AppColors.primaryColor,
+          ),
         ],
       ),
     );
@@ -105,7 +150,7 @@ class OfferBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 325,
+      height: 350,
       child: ListView(
         padding: const EdgeInsets.only(left: 39),
         scrollDirection: Axis.horizontal,
@@ -141,3 +186,5 @@ class OfferBuilder extends StatelessWidget {
     );
   }
 }
+
+enum _SelectedTab { home, favorite, search, person }

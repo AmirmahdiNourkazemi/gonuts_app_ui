@@ -20,7 +20,7 @@ Widget customCard(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Container(
           width: 220,
-          height: 325,
+          height: 350,
           decoration: const BoxDecoration(
             color: Colors.transparent,
           ),
@@ -29,7 +29,7 @@ Widget customCard(
       Positioned(
         child: Container(
           width: 193,
-          height: 325,
+          height: 350,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
