@@ -10,9 +10,9 @@ The Donuts app is a user-friendly application with smooth animations for the cou
 
 ## Screenshots
 
-![Screenshot 1](assets/images/intro.png)
-![Screenshot 2](assets/images/home.png)
-![Screenshot 3](assets/images/detail.png)
+| Intro | Home | Detail |
+|-------|------|--------|
+| ![Intro](assets/images/intro.png) | ![Home](assets/images/home.png) | ![Detail](assets/images/detail.png) |
 
 ## Packages Used
 
