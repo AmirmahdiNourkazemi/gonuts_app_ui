@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gonuts/constant/color.dart';
 import 'package:gonuts/detail_screen.dart';
 
@@ -17,10 +18,14 @@ Widget customCard(
 }) {
   return InkWell(
     onTap: () {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-        return DetailScreen(
-            imagePath, cardColor, title, description, discountedPrice);
-      }));
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) {
+            return DetailScreen(
+                imagePath, cardColor, title, description, discountedPrice);
+          },
+        ),
+      );
     },
     child: Stack(
       children: [

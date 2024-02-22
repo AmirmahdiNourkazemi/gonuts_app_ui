@@ -1,4 +1,6 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:gonuts/constant/color.dart';
 
@@ -6,6 +8,7 @@ class DetailScreen extends StatefulWidget {
   final String image;
   final Color backColor;
   final String name;
+
   String about =
       "These soft, cake-like Strawberry Frosted Donuts feature fresh strawberries and a delicious fresh strawberry glaze frosting. Pretty enough for company and the perfect treat to satisfy your sweet tooth.";
   final String cost;
@@ -17,6 +20,9 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  int counter = 1;
+  bool heart = false;
+  bool count = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,12 +68,55 @@ class _DetailScreenState extends State<DetailScreen> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          PhosphorIcons.heart_break_bold,
-                          color: AppColors.primaryColor,
-                          size: 32,
-                        ),
+                        onPressed: () {
+                          setState(() {
+                            heart = !heart;
+                          });
+                        },
+                        icon: !heart
+                            ? Animate(
+                                target: heart == true ? 1 : 0,
+                                child: const Icon(
+                                  PhosphorIcons.heart_break_bold,
+                                  color: AppColors.primaryColor,
+                                  size: 32,
+                                ),
+                              ).shake(
+                                duration: const Duration(milliseconds: 400),
+                                offset: const Offset(1, -4),
+                              )
+                            : const Icon(
+                                PhosphorIcons.heart_fill,
+                                color: AppColors.primaryColor,
+                                size: 32,
+                              ).animate(
+                                onComplete: (controller) {
+                                  final snackBar = SnackBar(
+                                    backgroundColor: widget.backColor,
+                                    content: Text(
+                                      'add to your favorite!!',
+                                      style:
+                                          Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                    action: SnackBarAction(
+                                      label: 'Undo',
+                                      textColor: Colors.black,
+                                      onPressed: () {
+                                        setState(
+                                          () {
+                                            heart = false;
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  );
+
+                                  // Find the ScaffoldMessenger in the widget tree
+                                  // and use it to show a SnackBar.
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                },
+                              ).scale(),
                       ),
                     )
                   ],
@@ -103,7 +152,12 @@ class _DetailScreenState extends State<DetailScreen> {
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              counter--;
+                              count = !count;
+                            });
+                          },
                           icon: const Icon(PhosphorIcons.minus_bold)),
                     ),
                     const SizedBox(
@@ -119,9 +173,11 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                       ),
                       child: Center(
-                          child: Text('1',
+                          child: Text(counter.toString(),
                               style: Theme.of(context).textTheme.bodySmall)),
-                    ),
+                    )
+                        .animate(target: count == true ? 1 : 0)
+                        .shake(offset: const Offset(0, -4)),
                     const SizedBox(
                       width: 10,
                     ),
@@ -130,7 +186,12 @@ class _DetailScreenState extends State<DetailScreen> {
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              counter++;
+                              count = !count;
+                            });
+                          },
                           icon: const Icon(PhosphorIcons.plus_bold)),
                     ),
                   ],
@@ -141,21 +202,27 @@ class _DetailScreenState extends State<DetailScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child: Text(
-                        widget.cost,
-                        style: const TextStyle(color: Colors.black),
+                      child: FadeInUp(
+                        from: 250,
+                        child: Text(
+                          widget.cost,
+                          style: const TextStyle(color: Colors.black),
+                        ),
                       ),
                     ),
                     Expanded(
                       flex: 3,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(200, 70),
-                            backgroundColor: AppColors.primaryColor),
-                        onPressed: () {},
-                        child: Text(
-                          'Add to Cart',
-                          style: Theme.of(context).textTheme.displayMedium,
+                      child: FadeInUp(
+                        from: 100,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              minimumSize: const Size(200, 70),
+                              backgroundColor: AppColors.primaryColor),
+                          onPressed: () {},
+                          child: Text(
+                            'Add to Cart',
+                            style: Theme.of(context).textTheme.displayMedium,
+                          ),
                         ),
                       ),
                     ),
@@ -176,7 +243,10 @@ class _DetailScreenState extends State<DetailScreen> {
               child: Image.asset(
                 widget.image,
                 width: 250,
-              ),
+              ).animate().rotate(
+                    curve: Curves.easeIn,
+                    duration: const Duration(milliseconds: 350),
+                  ),
             ),
           ),
         ],
