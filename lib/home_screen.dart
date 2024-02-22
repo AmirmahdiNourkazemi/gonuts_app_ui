@@ -1,5 +1,6 @@
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:gonuts/constant/color.dart';
 import 'package:gonuts/widget/donut_card.dart';
 import 'package:gonuts/widget/search_widget.dart';
@@ -106,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         currentIndex: _SelectedTab.values.indexOf(_selectedTab),
         dotIndicatorColor: Colors.white,
 
-        itemPadding: EdgeInsets.symmetric(horizontal: 30),
+        itemPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         enablePaddingAnimation: true,
         unselectedItemColor: Colors.grey[300],
         splashBorderRadius: 60,
@@ -115,26 +116,50 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         items: [
           /// Home
           DotNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: const Icon(
+              PhosphorIcons.house_fill,
+              size: 32,
+            ),
             selectedColor: AppColors.primaryColor,
+            unselectedColor: AppColors.onOrimaryColor,
           ),
 
           /// Likes
           DotNavigationBarItem(
-            icon: Icon(Icons.favorite),
+            icon: const Icon(
+              PhosphorIcons.heart_fill,
+              size: 32,
+            ),
             selectedColor: AppColors.primaryColor,
+            unselectedColor: AppColors.onOrimaryColor,
           ),
 
           /// Search
           DotNavigationBarItem(
-            icon: Icon(Icons.search),
+            icon: const Icon(
+              PhosphorIcons.bell_ringing_fill,
+              size: 32,
+            ),
             selectedColor: AppColors.primaryColor,
+            unselectedColor: AppColors.onOrimaryColor,
+          ),
+          DotNavigationBarItem(
+            icon: const Icon(
+              PhosphorIcons.storefront_fill,
+              size: 32,
+            ),
+            selectedColor: AppColors.primaryColor,
+            unselectedColor: AppColors.onOrimaryColor,
           ),
 
           /// Profile
           DotNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: const Icon(
+              PhosphorIcons.user_fill,
+              size: 32,
+            ),
             selectedColor: AppColors.primaryColor,
+            unselectedColor: AppColors.onOrimaryColor,
           ),
         ],
       ),
@@ -187,4 +212,4 @@ class OfferBuilder extends StatelessWidget {
   }
 }
 
-enum _SelectedTab { home, favorite, search, person }
+enum _SelectedTab { home, favorite, bell, store, person }
