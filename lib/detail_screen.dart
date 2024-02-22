@@ -244,8 +244,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 widget.image,
                 width: 250,
               ).animate().rotate(
-                    curve: Curves.easeIn,
-                    duration: const Duration(milliseconds: 350),
+                    curve: Curves.linear,
+                    duration: const Duration(milliseconds: 300),
                   ),
             ),
           ),

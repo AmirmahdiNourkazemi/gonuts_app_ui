@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
@@ -65,39 +66,41 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           SizedBox(
             height: 180,
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              scrollDirection: Axis.horizontal,
-              prototypeItem: createDonutCard(
-                context,
-                'Donuts',
-                'assets/images/donut_1.png',
-                'Chocolate Cherry',
-                '\$22',
-              ),
-              children: [
-                createDonutCard(
+            child: FadeInRight(
+              child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                scrollDirection: Axis.horizontal,
+                prototypeItem: createDonutCard(
                   context,
                   'Donuts',
                   'assets/images/donut_1.png',
                   'Chocolate Cherry',
                   '\$22',
                 ),
-                createDonutCard(
-                  context,
-                  'Donuts',
-                  'assets/images/donut_2.png',
-                  'Chocolate Cherry',
-                  '\$22',
-                ),
-                createDonutCard(
-                  context,
-                  'Donuts',
-                  'assets/images/donut_3.png',
-                  'Chocolate Cherry',
-                  '\$22',
-                ),
-              ],
+                children: [
+                  createDonutCard(
+                    context,
+                    'Donuts',
+                    'assets/images/donut_1.png',
+                    'Chocolate Cherry',
+                    '\$22',
+                  ),
+                  createDonutCard(
+                    context,
+                    'Donuts',
+                    'assets/images/donut_2.png',
+                    'Chocolate Cherry',
+                    '\$22',
+                  ),
+                  createDonutCard(
+                    context,
+                    'Donuts',
+                    'assets/images/donut_3.png',
+                    'Chocolate Cherry',
+                    '\$22',
+                  ),
+                ],
+              ),
             ),
           )
         ],
@@ -105,8 +108,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       bottomNavigationBar: DotNavigationBar(
         //margin: EdgeInsets.only(left: 10, right: 10),
         currentIndex: _SelectedTab.values.indexOf(_selectedTab),
-        dotIndicatorColor: Colors.white,
-
+        //dotIndicatorColor: Colors.white,
         itemPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         enablePaddingAnimation: true,
         unselectedItemColor: Colors.grey[300],
@@ -176,37 +178,39 @@ class OfferBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 350,
-      child: ListView(
-        padding: const EdgeInsets.only(left: 39),
-        scrollDirection: Axis.horizontal,
-        children: [
-          customCard(
-            context,
-            cardColor: const Color(0xffD7E4F6),
-            top: 30,
-            left: 80,
-            imagePath: 'assets/images/offer_1.png',
-            imageWidth: 150,
-            title: 'Strawberry Wheel',
-            description:
-                'These Baked Strawberry Donuts are filled with fresh strawberries...',
-            originalPrice: '\$20',
-            discountedPrice: '\$16',
-          ),
-          customCard(
-            context,
-            cardColor: AppColors.onOrimaryColor,
-            top: 30,
-            left: 80,
-            imagePath: 'assets/images/offer_2.png',
-            imageWidth: 150,
-            title: 'Chocolate Glaze',
-            description:
-                'Moist and fluffy baked chocolate donuts full of chocolate flavor.',
-            originalPrice: '\$20',
-            discountedPrice: '\$16',
-          )
-        ],
+      child: FadeInRight(
+        child: ListView(
+          padding: const EdgeInsets.only(left: 39),
+          scrollDirection: Axis.horizontal,
+          children: [
+            customCard(
+              context,
+              cardColor: const Color(0xffD7E4F6),
+              top: 30,
+              left: 80,
+              imagePath: 'assets/images/offer_1.png',
+              imageWidth: 150,
+              title: 'Strawberry Wheel',
+              description:
+                  'These Baked Strawberry Donuts are filled with fresh strawberries...',
+              originalPrice: '\$20',
+              discountedPrice: '\$16',
+            ),
+            customCard(
+              context,
+              cardColor: AppColors.onOrimaryColor,
+              top: 30,
+              left: 80,
+              imagePath: 'assets/images/offer_2.png',
+              imageWidth: 150,
+              title: 'Chocolate Glaze',
+              description:
+                  'Moist and fluffy baked chocolate donuts full of chocolate flavor.',
+              originalPrice: '\$20',
+              discountedPrice: '\$16',
+            )
+          ],
+        ),
       ),
     );
   }

@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         textTheme: CustomTextTheme().getTextTheme(context),
       ),
-      home: const HomeScreen(),
+      home: const InitScreen(),
     );
   }
 }
