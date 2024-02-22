@@ -49,6 +49,16 @@ class CustomTextTheme {
         color: AppColors.primaryColor,
         fontWeight: FontWeight.w700,
       ),
+      labelMedium: TextStyle(
+        fontSize: 25,
+        color: AppColors.primaryColor,
+        fontWeight: FontWeight.bold,
+      ),
+      displayMedium: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w700,
+        color: Colors.white,
+      ),
     );
   }
 }
